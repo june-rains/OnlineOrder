@@ -1,0 +1,31 @@
+# 我在build.gradle把这些jackson也好，datasource也好,都引入
+# 然后在application.yml里面customize
+spring:
+  # 用来设置json格式的configure
+  jackson:
+    default-property-inclusion: non_null # 当你json其中一个field为null时,我们不加
+    property-naming-strategy: SNAKE_CASE # 把所有的field变成smaller case + underscore形式
+
+  # 用来连接数据库的configure
+  datasource:
+    url: jdbc:postgresql://${DATABASE_URL:localhost}:5432/onlineorder
+    username: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:secret}
+    driver-class-name: org.postgresql.Driver
+
+  # 告诉Spring Application, 每次启动项目的时候，会初始化数据库
+  sql:
+    init:
+      mode: ${INIT_DB:always}
+      schema-locations: "classpath:database-init.sql"
+
+  # cache 配置 -> 在你写的时候结束1min过期
+  cache:
+    caffeine:
+      spec: expireAfterWrite=1m
+
+
+logging:
+  level:
+    org.apache.coyote.http11.Http11InputBuffer: DEBUG # Incoming HTTP Requests
+    org.springframework.jdbc.core: DEBUG # SQL
