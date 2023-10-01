@@ -1,6 +1,6 @@
 # OnlineOrder
 ## Summary
-This is a full stack Door-Dash like web application based on SpringBoot and React.  
+This is a full stack Door-Dash like web application based on **SpringBoot** and **React**.  
 Implement features are as following:
 * session based user authentication, user can sign up/sign in/sign out on this website
 * website can show different restaurant menu, and basic information of food item
